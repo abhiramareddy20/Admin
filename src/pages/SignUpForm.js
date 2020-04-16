@@ -31,6 +31,7 @@ class SignUpForm extends Component {
         e.preventDefault();
 
         fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
+            alert("Registration Successful");
             }).then((u)=>{console.log(u)})
             .catch((error) => {
                 console.log(error);

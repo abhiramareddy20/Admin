@@ -29,8 +29,10 @@ class SignInForm extends Component {
         e.preventDefault();
 
         fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
-            
+            alert("Data Exists");
+
         }).catch((error) => {
+            alert(error);
             console.log(error);
           });
 
