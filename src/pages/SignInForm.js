@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import fire from '../config/firebase';
 
 class SignInForm extends Component {
     constructor() {
@@ -26,6 +27,12 @@ class SignInForm extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
+
+        fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
+            
+        }).catch((error) => {
+            console.log(error);
+          });
 
         console.log('The form was submitted with the following data:');
         console.log(this.state);
