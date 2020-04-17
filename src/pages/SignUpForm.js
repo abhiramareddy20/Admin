@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import fire from '../config/firebase';
+import '@firebase/firestore'
+
+
 
 class SignUpForm extends Component {
     constructor() {
@@ -27,13 +30,35 @@ class SignUpForm extends Component {
         });
     }
 
+    // addUser = e => {
+    //     e.preventDefault();
+    //     const db = firebase.firestore();
+    //     db.settings({
+    //       timestampsInSnapshots: true
+    //     });
+    //     const userRef = db.collection('users').add({
+    //       fullname: this.state.name,
+    //       email: this.state.email
+          
+    //     });  
+    //     this.setState({
+    //       fullname: '',
+    //       email: ''
+    //     });
+    //   };
+
     handleSubmit(e) {
         e.preventDefault();
 
         fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
             alert("Registration Successful");
+            fire.firestore().collection('users').add({
+              title: this.state.name,
+              email: this.state.email
+            })
             }).then((u)=>{console.log(u)})
             .catch((error) => {
+                alert(error);
                 console.log(error);
             })
                 console.log('The form was submitted with the following data:');
@@ -43,7 +68,7 @@ class SignUpForm extends Component {
     render() {
         return (
         <div className="FormCenter">
-            <form onSubmit={this.handleSubmit} className="FormFields">
+            <form onSubmit={this.handleSubmit}  className="FormFields">
               <div className="FormField">
                 <label className="FormField__Label" htmlFor="name">Full Name</label>
                 <input type="text" id="name" className="FormField__Input" placeholder="Enter your full name" name="name" value={this.state.name} onChange={this.handleChange} />
