@@ -5,6 +5,7 @@ import SignInForm from './pages/SignInForm';
 import About from './About/About';
 import './App.css';
 import fire from './config/firebase';
+import HomePage from './HomePage/Homepage';
 
 class App extends Component {
 
@@ -53,13 +54,14 @@ class App extends Component {
               </div>
 
               <Route exact path="/sign-up" component={SignUpForm}></Route>
-              <Route path="/sign-in" component={SignInForm}>
-              </Route>
-              
+              <Route path="/sign-in" component={SignInForm}></Route>
               <Route path ="/about" component={About}></Route>
+              <Route path ="/homepage" component={HomePage}></Route>
+
           </div>
 
         </div>
+
       </Router>
     );
   }
